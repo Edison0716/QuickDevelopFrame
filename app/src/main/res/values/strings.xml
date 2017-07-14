@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Android 快速开发框架</string>
+    <string name="simple_view_behavior">com.junlong.quickdevelopframe.behavior.SimpleViewBehavior</string>
+</resources>
