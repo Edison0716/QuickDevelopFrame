@@ -18,6 +18,7 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by ${巴黎没有摩天轮Li} on 2017/7/11.
+ * 动态输入搜索
  */
 
 public class RxEdit {

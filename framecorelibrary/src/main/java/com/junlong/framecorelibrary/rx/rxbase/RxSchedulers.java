@@ -13,6 +13,7 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by ${巴黎没有摩天轮Li} on 2017/7/11.
+ * 线程调度
  */
 
 public class RxSchedulers {

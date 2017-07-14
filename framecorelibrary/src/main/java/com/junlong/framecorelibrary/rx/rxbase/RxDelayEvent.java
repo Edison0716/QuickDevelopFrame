@@ -8,6 +8,7 @@ import io.reactivex.functions.Consumer;
 
 /**
  * Created by ${巴黎没有摩天轮Li} on 2017/5/31.
+ * 延迟事件
  */
 
 public class RxDelayEvent {

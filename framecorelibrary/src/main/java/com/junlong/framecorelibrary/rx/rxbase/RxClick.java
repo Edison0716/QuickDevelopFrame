@@ -12,7 +12,7 @@ import io.reactivex.disposables.Disposable;
 
 /**
  * Created by ${巴黎没有摩天轮Li} on 2017/5/26.
- * Button 防抖动
+ * 点击事件防抖动
  */
 
 public class RxClick {
