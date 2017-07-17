@@ -43,7 +43,5 @@ dependencies {
     compile 'com.lzy.widget:imagepicker:0.5.5'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
     testCompile 'junit:junit:4.12'
-    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+
 }

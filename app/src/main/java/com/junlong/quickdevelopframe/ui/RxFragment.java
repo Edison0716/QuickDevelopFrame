@@ -14,7 +14,7 @@ import java.util.List;
 public class RxFragment extends MainFragment {
     @Override
     public void onItemClick(int position) {
-        if (position==0) startActivity(new Intent(getActivity(), RxClickActivity.class));
+        if (position==0) readyGo(RxClickActivity.class);
     }
 
     @Override

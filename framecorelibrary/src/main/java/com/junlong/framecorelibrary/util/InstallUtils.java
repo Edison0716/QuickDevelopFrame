@@ -13,7 +13,7 @@ import java.io.File;
  * Created by ${巴黎没有摩天轮Li} on 2017/7/13.
  * 自动安装工具类
  */
-public class InstallUtil {
+public class InstallUtils {
     /**
      * @param fileUrl      文件路径
      * @param activity     上下文

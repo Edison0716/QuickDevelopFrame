@@ -15,13 +15,11 @@ import com.squareup.leakcanary.RefWatcher;
  */
 
 public class MyApp extends BaseApplication {
-    //Application为整个应用保存全局的RefWatcher
-    private RefWatcher refWatcher;
+
     @Override
     public void onCreate() {
         super.onCreate();
         initPicker();
-        refWatcher = LeakCanary.install(this);
     }
 
     private void initPicker() {
@@ -36,11 +34,5 @@ public class MyApp extends BaseApplication {
         imagePicker.setFocusHeight(800);  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
         imagePicker.setOutPutX(1000);//保存文件的宽度。单位像素
         imagePicker.setOutPutY(1000);//保存文件的高度。单位像素
-    }
-
-
-    public static RefWatcher getRefWatcher(Context context) {
-        MyApp application = (MyApp) context.getApplicationContext();
-        return application.refWatcher;
     }
 }

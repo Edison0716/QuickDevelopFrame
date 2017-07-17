@@ -1,6 +1,7 @@
 package com.junlong.framecorelibrary.mvp.base;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
@@ -56,5 +57,55 @@ public abstract class BaseFragment extends Fragment {
     public <T extends View> T bindView(@IdRes int id){
         View viewById = mView.findViewById(id);
         return (T) viewById;
+    }
+
+    /**
+     * @param clazz
+     * @param bundle 跳转页面
+     */
+    protected void readyGo(Class<?> clazz, Bundle bundle) {
+        Intent intent = new Intent(getActivity(), clazz);
+        if (null != bundle)
+            intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    protected void readyGo(Class<?> clazz) {
+        readyGo(clazz, null);
+    }
+
+    /**
+     * @param clazz  目标Activity
+     * @param bundle 数据
+     */
+    protected void readyGoThenKill(Class<?> clazz, Bundle bundle) {
+        readyGo(clazz, bundle);
+        getActivity().finish();
+    }
+
+    /**
+     * startActivityForResult
+     *
+     * @param clazz       目标Activity
+     * @param requestCode 发送判断值
+     */
+    protected void readyGoForResult(Class<?> clazz, int requestCode) {
+        Intent intent = new Intent(getActivity(), clazz);
+        startActivityForResult(intent, requestCode);
+    }
+
+    /**
+     * startActivityForResult with bundle
+     *
+     * @param clazz       目标Activity
+     * @param requestCode 发送判断值
+     * @param bundle      数据
+     */
+    protected void readyGoForResult(Class<?> clazz, int requestCode, Bundle bundle) {
+        Intent intent = new Intent(getActivity(), clazz);
+        if (null != bundle) {
+            intent.putExtras(bundle);
+        }
+        startActivityForResult(intent, requestCode);
     }
 }

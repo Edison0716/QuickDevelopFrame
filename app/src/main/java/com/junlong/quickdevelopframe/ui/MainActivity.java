@@ -5,23 +5,26 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.util.Pair;
 
 import com.junlong.framecorelibrary.mvp.base.BaseActivity;
-import com.junlong.framecorelibrary.util.StatusBarUtil;
+import com.junlong.framecorelibrary.mvp.base.BaseMvcActivity;
+import com.junlong.framecorelibrary.util.ScreenUtils;
+import com.junlong.framecorelibrary.util.StatusBarUtils;
 import com.junlong.quickdevelopframe.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseMvcActivity {
     private TabLayout mTab;
     private ViewPager mPager;
     private List<Pair<String, Fragment>> items;
 
     @Override
     protected void initStatusBar() {
-        StatusBarUtil.setTranslucentForCoordinatorLayout(this,0);
+        StatusBarUtils.setTranslucentForCoordinatorLayout(this,0);
     }
 
     @Override
@@ -29,12 +32,16 @@ public class MainActivity extends BaseActivity {
         return R.layout.activity_main;
     }
 
+
+    @Override
+    protected int setScreenOrientation() {
+        return 0;
+    }
+
     @Override
     protected void initView() {
         mTab = bindView(R.id.tab);
         mPager = bindView(R.id.viewPager);
-
-
         mPager.setAdapter(new MainAdapter(getSupportFragmentManager()));
         mTab.setupWithViewPager(mPager);
     }

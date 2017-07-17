@@ -25,4 +25,6 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends BaseFragm
             mvpPresenter.detachView();
         }
     }
+
+
 }
