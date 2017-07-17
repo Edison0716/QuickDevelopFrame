@@ -28,7 +28,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private final int SCREEN_DEFAULT = 0;//跟随系统
     private final int SCREEN_PORTRAIT = 1;//设置竖屏
     private final int SCREEN_LANDSCOPE = 2;//设置横屏
-    private int screenOrientationFlag = 0; //默认是跟随系统
+    private int screenOrientationFlag = 0; //默认跟随系统
     private CompositeDisposable compositeDisposable;
 
     @Override
