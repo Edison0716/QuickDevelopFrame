@@ -6,12 +6,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.junlong.quickdevelopframe.ui.rx.RxClickActivity">
-    
+
     <Button
         android:id="@+id/bt_joggle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="防抖动"/>
+
     <TextView
         android:id="@+id/tv_count"
         android:layout_width="match_parent"
