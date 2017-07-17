@@ -5,4 +5,6 @@ package com.junlong.framecorelibrary.base;
  */
 
 public abstract class BaseMvcFragment extends BaseFragment{
+    protected abstract void showLoading();
+    protected abstract void hideLoading();
 }

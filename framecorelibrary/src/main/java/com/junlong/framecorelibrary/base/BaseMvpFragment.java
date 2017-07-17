@@ -26,5 +26,7 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends BaseFragm
         }
     }
 
+    protected abstract void showLoading();
+    protected abstract void hideLoading();
 
 }

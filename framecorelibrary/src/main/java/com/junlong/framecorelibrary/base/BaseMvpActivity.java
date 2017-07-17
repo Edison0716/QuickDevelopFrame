@@ -24,12 +24,6 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends BaseActiv
             mvpPresenter.detachView();
         }
     }
-
-    public void showLoading() {
-
-    }
-
-    public void hideLoading() {
-
-    }
+    protected abstract void showLoading();
+    protected abstract void hideLoading();
 }

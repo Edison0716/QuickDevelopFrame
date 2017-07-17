@@ -57,4 +57,14 @@ public class RxClickActivity extends BaseMvcActivity {
         //leakcanady 内存泄漏监控
         BaseApplication.getRefWatcher(this).watch(this);
     }
+
+    @Override
+    protected void showLoading() {
+
+    }
+
+    @Override
+    protected void hideLoading() {
+
+    }
 }

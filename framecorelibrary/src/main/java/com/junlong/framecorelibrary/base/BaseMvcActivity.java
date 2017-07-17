@@ -5,5 +5,6 @@ package com.junlong.framecorelibrary.base;
  */
 
 public abstract class BaseMvcActivity extends BaseActivity {
-
+    protected abstract void showLoading();
+    protected abstract void hideLoading();
 }

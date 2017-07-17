@@ -51,6 +51,16 @@ public class MainActivity extends BaseMvcActivity {
 
     }
 
+    @Override
+    protected void showLoading() {
+
+    }
+
+    @Override
+    protected void hideLoading() {
+
+    }
+
     private class MainAdapter extends FragmentPagerAdapter {
 
         MainAdapter(FragmentManager fm) {
