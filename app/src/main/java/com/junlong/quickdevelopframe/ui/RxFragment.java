@@ -1,7 +1,5 @@
 package com.junlong.quickdevelopframe.ui;
 
-import android.content.Intent;
-
 import com.junlong.quickdevelopframe.model.ItemModel;
 import com.junlong.quickdevelopframe.ui.rx.RxClickActivity;
 
