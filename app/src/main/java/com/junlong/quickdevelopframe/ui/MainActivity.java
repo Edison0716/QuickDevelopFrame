@@ -5,12 +5,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.util.Pair;
 
-import com.junlong.framecorelibrary.mvp.base.BaseActivity;
-import com.junlong.framecorelibrary.mvp.base.BaseMvcActivity;
-import com.junlong.framecorelibrary.util.ScreenUtils;
+import com.junlong.framecorelibrary.base.BaseMvcActivity;
 import com.junlong.framecorelibrary.util.StatusBarUtils;
 import com.junlong.quickdevelopframe.R;
 

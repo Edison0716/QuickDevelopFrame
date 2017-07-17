@@ -1,4 +1,4 @@
-package com.junlong.framecorelibrary.mvp.base;
+package com.junlong.framecorelibrary.base;
 
 import android.os.Bundle;
 import android.view.View;

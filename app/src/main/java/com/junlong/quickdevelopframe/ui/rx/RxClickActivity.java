@@ -5,7 +5,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.junlong.framecorelibrary.BaseApplication;
-import com.junlong.framecorelibrary.mvp.base.BaseMvcActivity;
+import com.junlong.framecorelibrary.base.BaseMvcActivity;
 import com.junlong.framecorelibrary.rx.rxbase.OnClickCallBack;
 import com.junlong.framecorelibrary.rx.rxbase.RxClick;
 import com.junlong.quickdevelopframe.R;

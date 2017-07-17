@@ -11,7 +11,7 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.junlong.framecorelibrary.mvp.base.BaseFragment;
+import com.junlong.framecorelibrary.base.BaseFragment;
 import com.junlong.quickdevelopframe.model.ItemModel;
 import com.junlong.quickdevelopframe.R;
 
