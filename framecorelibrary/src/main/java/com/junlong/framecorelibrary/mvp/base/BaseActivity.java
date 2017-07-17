@@ -12,7 +12,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.junlong.framecorelibrary.BaseApplication;
+import com.junlong.framecorelibrary.rx.rxbus.RxBus;
 import com.junlong.framecorelibrary.util.ScreenUtils;
+
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by ${巴黎没有摩天轮Li} on 2017/7/7.
@@ -25,6 +29,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private final int SCREEN_PORTRAIT = 1;//设置竖屏
     private final int SCREEN_LANDSCOPE = 2;//设置横屏
     private int screenOrientationFlag = 0; //默认是跟随系统
+    private CompositeDisposable compositeDisposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +93,17 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.d(mShortClassName, "已销毁");
+
+        //rxBus取消订阅
+        if (RxBus.getDefault().isRegistered(this)) {
+            RxBus.getDefault().unregister(this);
+        }
+
+        //leakcanady 内存泄漏监控
         BaseApplication.getRefWatcher(this).watch(this);
+
+        //取消rxjava 订阅
+        dispose();
     }
 
     @Override
@@ -151,6 +166,19 @@ public abstract class BaseActivity extends AppCompatActivity {
             intent.putExtras(bundle);
         }
         startActivityForResult(intent, requestCode);
+    }
+
+    //添加rxjava队列
+    public void addDisposable(Disposable disposable) {
+        if (compositeDisposable == null) {
+            compositeDisposable = new CompositeDisposable();
+        }
+        compositeDisposable.add(disposable);
+    }
+
+    //接触rxjava订阅
+    public void dispose() {
+        if (compositeDisposable != null) compositeDisposable.dispose();
     }
 
 }

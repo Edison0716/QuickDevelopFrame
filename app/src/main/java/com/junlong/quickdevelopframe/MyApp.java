@@ -15,11 +15,11 @@ import com.squareup.leakcanary.RefWatcher;
  */
 
 public class MyApp extends BaseApplication {
-
     @Override
     public void onCreate() {
         super.onCreate();
         initPicker();
+
     }
 
     private void initPicker() {

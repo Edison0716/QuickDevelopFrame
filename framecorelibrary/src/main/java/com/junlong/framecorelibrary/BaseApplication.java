@@ -30,9 +30,9 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        refWatcher = LeakCanary.install(this);//初始化leakcanary
         mContext = this;
         Utils.init(this);//初始化工具类
-        refWatcher = LeakCanary.install(this);//初始化leakcanary
         initOkGo();//初始化okgo
     }
 

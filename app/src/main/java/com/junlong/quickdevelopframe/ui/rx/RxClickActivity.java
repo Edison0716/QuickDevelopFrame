@@ -4,6 +4,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.junlong.framecorelibrary.BaseApplication;
 import com.junlong.framecorelibrary.mvp.base.BaseMvcActivity;
 import com.junlong.framecorelibrary.rx.rxbase.OnClickCallBack;
 import com.junlong.framecorelibrary.rx.rxbase.RxClick;
@@ -29,6 +30,7 @@ public class RxClickActivity extends BaseMvcActivity {
                 Log.d("count",String.valueOf(i));
             }
         });
+
     }
 
     @Override
@@ -46,4 +48,10 @@ public class RxClickActivity extends BaseMvcActivity {
         return R.layout.activity_rx_click;
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //leakcanady 内存泄漏监控
+        BaseApplication.getRefWatcher(this).watch(this);
+    }
 }
