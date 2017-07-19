@@ -11,6 +11,8 @@ import com.junlong.framecorelibrary.rx.rxbase.RxClick;
 import com.junlong.framecorelibrary.util.CacheUtils;
 import com.junlong.quickdevelopframe.R;
 
+import io.reactivex.disposables.Disposable;
+
 public class RxClickActivity extends BaseMvcActivity {
     private int i = 0;
 
@@ -31,6 +33,11 @@ public class RxClickActivity extends BaseMvcActivity {
                 i++;
                 tvCount.setText(String.valueOf(i));
                 Log.d("count",String.valueOf(i));
+            }
+
+            @Override
+            public void getDisposable(Disposable d) {
+                addDisposable(d);
             }
         });
 

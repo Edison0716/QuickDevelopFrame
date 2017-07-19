@@ -10,8 +10,10 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -36,12 +38,33 @@ public class RxEdit {
                     }
                 }).compose(RxSchedulers.io_main_observable())
 
-                .subscribe(new Consumer<Object>() {
+                .subscribe(/*new Consumer<Object>() {
                     @Override
                     public void accept(@NonNull Object strings) throws Exception {
                         //界面更新，这里用打印替代
                         callBack.doEvent(strings);
                     }
-                });
+                }*/
+                        new Observer<Object>() {
+                            @Override
+                            public void onSubscribe(@NonNull Disposable d) {
+
+                            }
+
+                            @Override
+                            public void onNext(@NonNull Object o) {
+
+                            }
+
+                            @Override
+                            public void onError(@NonNull Throwable e) {
+
+                            }
+
+                            @Override
+                            public void onComplete() {
+
+                            }
+                        });
     }
 }

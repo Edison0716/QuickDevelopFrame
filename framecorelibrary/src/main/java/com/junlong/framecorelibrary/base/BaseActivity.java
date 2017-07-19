@@ -176,8 +176,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         compositeDisposable.add(disposable);
     }
 
-    //接触rxjava订阅
-    public void dispose() {
+    //解除rxjava订阅
+    private void dispose() {
         if (compositeDisposable != null) compositeDisposable.dispose();
     }
 

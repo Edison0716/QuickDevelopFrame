@@ -20,7 +20,7 @@ public class RxClick {
         RxView.clicks(v).throttleFirst(delayTime, TimeUnit.SECONDS).subscribe(new Observer<Object>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
-
+                callBack.getDisposable(d);
             }
 
             @Override
