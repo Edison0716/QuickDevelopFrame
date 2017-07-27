@@ -6,12 +6,13 @@ import android.os.Bundle;
  * Created by ${巴黎没有摩天轮Li} on 2017/7/7.
  */
 
-public abstract class BaseMvpActivity<P extends BasePresenter> extends BaseActivity {
+public abstract class BaseMvpActivity<V, P extends BasePresenter<V>> extends BaseActivity {
     protected P mvpPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mvpPresenter = createPresenter();
+        mvpPresenter.attachView((V) this);
         super.onCreate(savedInstanceState);
     }
 
@@ -24,6 +25,8 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends BaseActiv
             mvpPresenter.detachView();
         }
     }
+
     protected abstract void showLoading();
+
     protected abstract void hideLoading();
 }
