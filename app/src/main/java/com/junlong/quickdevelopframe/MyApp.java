@@ -7,8 +7,7 @@ import com.junlong.framecorelibrary.BaseApplication;
 import com.junlong.quickdevelopframe.manager.GlideImagePickerLoader;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.view.CropImageView;
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
+
 
 /**
  * Created by ${巴黎没有摩天轮Li} on 2017/7/13.

@@ -99,9 +99,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             RxBus.getDefault().unregister(this);
         }
 
-        //leakcanady 内存泄漏监控
-        BaseApplication.getRefWatcher(this).watch(this);
-
         //取消rxjava 订阅
         dispose();
     }

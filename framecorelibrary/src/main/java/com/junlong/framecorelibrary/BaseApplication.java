@@ -10,8 +10,6 @@ import com.junlong.framecorelibrary.conn.okgo.cookie.CookieJarImpl;
 import com.junlong.framecorelibrary.conn.okgo.cookie.store.DBCookieStore;
 import com.junlong.framecorelibrary.conn.okgo.interceptor.HttpLoggingInterceptor;
 import com.junlong.framecorelibrary.util.Utils;
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -24,13 +22,9 @@ import okhttp3.OkHttpClient;
 
 public class BaseApplication extends Application {
     public static Context mContext;//全局上下文
-    //Application为整个应用保存全局的RefWatcher
-    private RefWatcher refWatcher;
-
     @Override
     public void onCreate() {
         super.onCreate();
-        refWatcher = LeakCanary.install(this);//初始化leakcanary
         mContext = this;
         Utils.init(this);//初始化工具类
         initOkGo();//初始化okgo
@@ -79,10 +73,5 @@ public class BaseApplication extends Application {
                 .setRetryCount(3);                              //全局统一超时重连次数，默认为三次，那么最差的情况会请求4次(一次原始请求，三次重连请求)，不需要可以设置为0
         //.addCommonHeaders(headers)                    //全局公共头
         //.addCommonParams(params);
-    }
-
-    public static RefWatcher getRefWatcher(Context context) {
-        BaseApplication application = (BaseApplication) context.getApplicationContext();
-        return application.refWatcher;
     }
 }

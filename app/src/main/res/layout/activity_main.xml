@@ -49,12 +49,6 @@
             app:tabTextAppearance="@style/TabLayoutTextStyle"/>
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
     <TextView
         android:id="@+id/toolbar_title"
         android:layout_width="match_parent"
@@ -73,6 +67,12 @@
         app:svb_dependType="y"
         app:svb_targetAlpha="1"
         app:svb_targetY="0dp"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 
 </android.support.design.widget.CoordinatorLayout>

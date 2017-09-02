@@ -61,8 +61,6 @@ public class RxClickActivity extends BaseMvcActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //leakcanady 内存泄漏监控
-        BaseApplication.getRefWatcher(this).watch(this);
     }
 
     @Override
