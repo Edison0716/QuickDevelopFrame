@@ -22,6 +22,7 @@ public class MainActivity extends BaseMvcActivity {
     @Override
     protected void initStatusBar() {
         StatusBarUtils.setTranslucentForCoordinatorLayout(this,0);
+
     }
 
     @Override
@@ -29,11 +30,6 @@ public class MainActivity extends BaseMvcActivity {
         return R.layout.activity_main;
     }
 
-
-    @Override
-    protected boolean setSwipeBack() {
-        return false;
-    }
 
     @Override
     protected int setScreenOrientation() {

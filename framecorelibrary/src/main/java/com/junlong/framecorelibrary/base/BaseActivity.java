@@ -34,7 +34,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     private final int SCREEN_PORTRAIT = 1;//portrait screen
     private final int SCREEN_LANDSCOPE = 2;//landscape screen
     private int screenOrientationFlag = 0; //following system orientation
-    private boolean isSwipeBack = true;//set default swipeback
     private CompositeDisposable compositeDisposable;
 
     @Override
@@ -43,18 +42,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         doBeforeSetContentView();
         setContentView(getLayoutId());
         SwipeBackHelper.onCreate(this);//init swipeback
-        isSwipeBack = setSwipeBack();
-        initSwipeBack(isSwipeBack);
         mActivity = this;
         getActivityInfo();
         initData();
         initView();
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        SwipeBackHelper.onPostCreate(this);//init swipeback finish
     }
 
     private void getActivityInfo() {
@@ -79,8 +70,6 @@ public abstract class BaseActivity extends AppCompatActivity {
                 break;
         }
     }
-
-    protected abstract boolean setSwipeBack();
 
     protected abstract int setScreenOrientation();//set screen orientation
 
@@ -199,9 +188,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-    private void initSwipeBack(boolean isSwipeBack) {
+    public void initSwipeBack() {
         SwipeBackHelper.getCurrentPage(this)//获取当前页面
-                .setSwipeBackEnable(isSwipeBack)//设置是否可滑动
+                .setSwipeBackEnable(true)//设置是否可滑动
                 .setSwipeEdge(200)//可滑动的范围。px。200表示为左边200px的屏幕
                 .setSwipeEdgePercent(0.2f)//可滑动的范围。百分比。0.2表示为左边20%的屏幕
                 .setSwipeSensitivity(0.5f)//对横向滑动手势的敏感程度。0为迟钝 1为敏感

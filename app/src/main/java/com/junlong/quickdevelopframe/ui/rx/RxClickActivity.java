@@ -17,11 +17,6 @@ public class RxClickActivity extends BaseMvcActivity {
     private int i = 0;
 
     @Override
-    protected boolean setSwipeBack() {
-        return true;
-    }
-
-    @Override
     protected int setScreenOrientation() {
         return 1;
     }

@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity" android:theme="@style/AppThemeBase">
+        <activity
+            android:name=".ui.MainActivity"
+            android:theme="@style/AppThemeBase">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -26,6 +28,8 @@
             android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"
             android:theme="@style/ImagePickerThemeFullScreen"/>
         <activity android:name=".ui.rx.RxClickActivity">
+        </activity>
+        <activity android:name=".ui.Main2Activity">
         </activity>
     </application>
 

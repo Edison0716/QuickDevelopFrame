@@ -37,11 +37,11 @@ dependencies {
     })
     //指定版本
     compile project(':framecorelibrary')
+
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support:design:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.lzy.widget:imagepicker:0.5.5'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
     testCompile 'junit:junit:4.12'
-
 }
