@@ -19,6 +19,7 @@ import com.junlong.framecorelibrary.rx.rxbus.RxBus;
 import com.junlong.framecorelibrary.swipebackhelper.SwipeBackHelper;
 import com.junlong.framecorelibrary.swipebackhelper.SwipeListener;
 import com.junlong.framecorelibrary.util.ScreenUtils;
+import com.junlong.framecorelibrary.util.ToastUtils;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -82,11 +83,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract int getLayoutId();
 
     public void toastShow(int resId) {
-        Toast.makeText(mActivity, resId, Toast.LENGTH_SHORT).show();
+        ToastUtils.normal(resId);
     }
 
     public void toastShow(String resId) {
-        Toast.makeText(mActivity, resId, Toast.LENGTH_SHORT).show();
+        ToastUtils.normal(resId);
     }
 
     //bind view
