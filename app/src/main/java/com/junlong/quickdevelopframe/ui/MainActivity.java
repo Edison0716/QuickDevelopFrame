@@ -31,6 +31,11 @@ public class MainActivity extends BaseMvcActivity {
 
 
     @Override
+    protected boolean setSwipeBack() {
+        return false;
+    }
+
+    @Override
     protected int setScreenOrientation() {
         return 0;
     }

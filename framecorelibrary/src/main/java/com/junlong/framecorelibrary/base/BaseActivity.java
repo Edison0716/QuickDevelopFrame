@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.IdRes;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +16,8 @@ import android.widget.Toast;
 
 import com.junlong.framecorelibrary.BaseApplication;
 import com.junlong.framecorelibrary.rx.rxbus.RxBus;
+import com.junlong.framecorelibrary.swipebackhelper.SwipeBackHelper;
+import com.junlong.framecorelibrary.swipebackhelper.SwipeListener;
 import com.junlong.framecorelibrary.util.ScreenUtils;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -25,10 +30,11 @@ import io.reactivex.disposables.Disposable;
 public abstract class BaseActivity extends AppCompatActivity {
     public Activity mActivity;
     private String mShortClassName;
-    private final int SCREEN_DEFAULT = 0;//跟随系统
-    private final int SCREEN_PORTRAIT = 1;//设置竖屏
-    private final int SCREEN_LANDSCOPE = 2;//设置横屏
-    private int screenOrientationFlag = 0; //默认跟随系统
+    private final int SCREEN_DEFAULT = 0;//following system orientation
+    private final int SCREEN_PORTRAIT = 1;//portrait screen
+    private final int SCREEN_LANDSCOPE = 2;//landscape screen
+    private int screenOrientationFlag = 0; //following system orientation
+    private boolean isSwipeBack = true;//set default swipeback
     private CompositeDisposable compositeDisposable;
 
     @Override
@@ -36,18 +42,27 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         doBeforeSetContentView();
         setContentView(getLayoutId());
+        SwipeBackHelper.onCreate(this);//init swipeback
+        isSwipeBack = setSwipeBack();
+        initSwipeBack(isSwipeBack);
         mActivity = this;
         getActivityInfo();
         initData();
         initView();
     }
 
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        SwipeBackHelper.onPostCreate(this);//init swipeback finish
+    }
+
     private void getActivityInfo() {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         ActivityManager.RunningTaskInfo info = manager.getRunningTasks(1).get(0);
-        //类名
+        //class name
         mShortClassName = info.topActivity.getShortClassName();
-        Log.d(mShortClassName, "已创建");
+        Log.d(mShortClassName, "onCreate");
     }
 
     private void doBeforeSetContentView() {
@@ -65,13 +80,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    protected abstract int setScreenOrientation();//设置横竖屏
+    protected abstract boolean setSwipeBack();
 
-    protected abstract void initView();//初始化 view
+    protected abstract int setScreenOrientation();//set screen orientation
 
-    protected abstract void initData();//初始化 数据
+    protected abstract void initView();//init view
 
-    protected abstract void initStatusBar();//初始化状态栏
+    protected abstract void initData();//init data
+
+    protected abstract void initStatusBar();//init status bar
 
     protected abstract int getLayoutId();
 
@@ -83,7 +100,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         Toast.makeText(mActivity, resId, Toast.LENGTH_SHORT).show();
     }
 
-    //绑定视图id
+    //bind view
     public <T extends View> T bindView(@IdRes int id) {
         View viewById = findViewById(id);
         return (T) viewById;
@@ -92,32 +109,35 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d(mShortClassName, "已销毁");
+        Log.d(mShortClassName, "onDestroy");
 
-        //rxBus取消订阅
+        //rxBus cancel registered
         if (RxBus.getDefault().isRegistered(this)) {
             RxBus.getDefault().unregister(this);
         }
 
-        //取消rxjava 订阅
+        //cancel rxjava registered
         dispose();
+
+        //destory swipeback
+        SwipeBackHelper.onDestroy(this);
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.d(mShortClassName, "已重启");
+        Log.d(mShortClassName, "onRestart");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d(mShortClassName, "已停止");
+        Log.d(mShortClassName, "onStop");
     }
 
     /**
      * @param clazz
-     * @param bundle 跳转页面
+     * @param bundle jump activity
      */
     protected void readyGo(Class<?> clazz, Bundle bundle) {
         Intent intent = new Intent(this, clazz);
@@ -131,8 +151,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * @param clazz  目标Activity
-     * @param bundle 数据
+     * @param clazz  aim activity
+     * @param bundle data
      */
     protected void readyGoThenKill(Class<?> clazz, Bundle bundle) {
         readyGo(clazz, bundle);
@@ -142,8 +162,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * startActivityForResult
      *
-     * @param clazz       目标Activity
-     * @param requestCode 发送判断值
+     * @param clazz       aim activity
+     * @param requestCode send flag code
      */
     protected void readyGoForResult(Class<?> clazz, int requestCode) {
         Intent intent = new Intent(this, clazz);
@@ -153,9 +173,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * startActivityForResult with bundle
      *
-     * @param clazz       目标Activity
-     * @param requestCode 发送判断值
-     * @param bundle      数据
+     * @param clazz       aim activity
+     * @param requestCode send flag code
+     * @param bundle      data
      */
     protected void readyGoForResult(Class<?> clazz, int requestCode, Bundle bundle) {
         Intent intent = new Intent(this, clazz);
@@ -165,7 +185,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         startActivityForResult(intent, requestCode);
     }
 
-    //添加rxjava队列
+    //add rxjava queue
     public void addDisposable(Disposable disposable) {
         if (compositeDisposable == null) {
             compositeDisposable = new CompositeDisposable();
@@ -173,9 +193,36 @@ public abstract class BaseActivity extends AppCompatActivity {
         compositeDisposable.add(disposable);
     }
 
-    //解除rxjava订阅
+    //releace rxjava register
     private void dispose() {
         if (compositeDisposable != null) compositeDisposable.dispose();
     }
 
+
+    private void initSwipeBack(boolean isSwipeBack) {
+        SwipeBackHelper.getCurrentPage(this)//获取当前页面
+                .setSwipeBackEnable(isSwipeBack)//设置是否可滑动
+                .setSwipeEdge(200)//可滑动的范围。px。200表示为左边200px的屏幕
+                .setSwipeEdgePercent(0.2f)//可滑动的范围。百分比。0.2表示为左边20%的屏幕
+                .setSwipeSensitivity(0.5f)//对横向滑动手势的敏感程度。0为迟钝 1为敏感
+                .setScrimColor(Color.GRAY)//底层阴影颜色
+                .setClosePercent(0.8f)//触发关闭Activity百分比
+                .setSwipeRelateEnable(false)//是否与下一级activity联动(微信效果)。默认关
+                .setSwipeRelateOffset(500)//activity联动时的偏移量。默认500px。
+                .setDisallowInterceptTouchEvent(true)//不抢占事件，默认关（事件将先由子View处理再由滑动关闭处理）
+                .addListener(new SwipeListener() {//滑动监听
+
+                    @Override
+                    public void onScroll(float percent, int px) {//滑动的百分比与距离
+                    }
+
+                    @Override
+                    public void onEdgeTouch() {//当开始滑动
+                    }
+
+                    @Override
+                    public void onScrollToClose() {//当滑动关闭
+                    }
+                });
+    }
 }

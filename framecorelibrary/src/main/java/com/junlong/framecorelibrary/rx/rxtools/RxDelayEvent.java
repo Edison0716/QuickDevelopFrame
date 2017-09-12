@@ -1,4 +1,4 @@
-package com.junlong.framecorelibrary.rx.rxbase;
+package com.junlong.framecorelibrary.rx.rxtools;
 
 import java.util.concurrent.TimeUnit;
 

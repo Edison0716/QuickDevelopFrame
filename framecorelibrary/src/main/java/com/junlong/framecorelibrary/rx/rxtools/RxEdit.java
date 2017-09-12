@@ -1,22 +1,17 @@
-package com.junlong.framecorelibrary.rx.rxbase;
+package com.junlong.framecorelibrary.rx.rxtools;
 
 import android.widget.EditText;
 
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by ${巴黎没有摩天轮Li} on 2017/7/11.

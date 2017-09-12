@@ -4,17 +4,22 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.junlong.framecorelibrary.BaseApplication;
 import com.junlong.framecorelibrary.base.BaseMvcActivity;
-import com.junlong.framecorelibrary.rx.rxbase.OnClickCallBack;
-import com.junlong.framecorelibrary.rx.rxbase.RxClick;
+import com.junlong.framecorelibrary.rx.rxtools.OnClickCallBack;
+import com.junlong.framecorelibrary.rx.rxtools.RxClick;
 import com.junlong.framecorelibrary.util.CacheUtils;
+import com.junlong.framecorelibrary.util.StatusBarUtils;
 import com.junlong.quickdevelopframe.R;
 
 import io.reactivex.disposables.Disposable;
 
 public class RxClickActivity extends BaseMvcActivity {
     private int i = 0;
+
+    @Override
+    protected boolean setSwipeBack() {
+        return true;
+    }
 
     @Override
     protected int setScreenOrientation() {
@@ -50,7 +55,7 @@ public class RxClickActivity extends BaseMvcActivity {
 
     @Override
     protected void initStatusBar() {
-
+        StatusBarUtils.setColorForSwipeBack(this,getResources().getColor(R.color.colorPrimary),0);
     }
 
     @Override

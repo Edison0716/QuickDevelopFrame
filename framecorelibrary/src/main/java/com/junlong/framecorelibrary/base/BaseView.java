@@ -5,6 +5,5 @@ package com.junlong.framecorelibrary.base;
  */
 
 public interface BaseView {
-    void showLoading();
-    void hideLoading();
+
 }
