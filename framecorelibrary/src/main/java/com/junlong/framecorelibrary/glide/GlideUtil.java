@@ -110,8 +110,6 @@ public class GlideUtil {
             }
         }).apply(bitmapTransform(new BlurTransformation(blur))).into(view);
     }
-
-
 }
 
 
