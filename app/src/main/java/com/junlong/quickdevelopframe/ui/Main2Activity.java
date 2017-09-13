@@ -1,27 +1,35 @@
 package com.junlong.quickdevelopframe.ui;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.junlong.framecorelibrary.base.BaseMvcActivity;
+import com.junlong.framecorelibrary.rx.rxtools.OnEventCallBack;
+import com.junlong.framecorelibrary.rx.rxtools.RxDoubleClick;
 import com.junlong.quickdevelopframe.R;
+
+import java.util.List;
 
 public class Main2Activity extends BaseMvcActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
-    }
+
+    private List<String> mValueList;
 
     @Override
     protected int setScreenOrientation() {
-        return 0;
+        return 1;
     }
 
     @Override
     protected void initView() {
-
+        Button etSearch = bindView(R.id.et_search);
+        RxDoubleClick.onDoubleClick(etSearch, new OnEventCallBack() {
+            @Override
+            public void doEvent() {
+                Toast.makeText(getApplicationContext(),"刷新",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -36,7 +44,7 @@ public class Main2Activity extends BaseMvcActivity {
 
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.activity_main2;
     }
 
     @Override
