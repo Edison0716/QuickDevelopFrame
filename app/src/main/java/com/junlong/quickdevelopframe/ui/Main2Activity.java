@@ -1,11 +1,12 @@
 package com.junlong.quickdevelopframe.ui;
 
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.junlong.framecorelibrary.base.BaseMvcActivity;
+import com.junlong.framecorelibrary.glide.GlideUtil;
+import com.junlong.framecorelibrary.glide.RequestCallBack;
 import com.junlong.framecorelibrary.rx.rxtools.OnEventCallBack;
 import com.junlong.framecorelibrary.rx.rxtools.RxDoubleClick;
 import com.junlong.quickdevelopframe.R;
@@ -28,8 +29,21 @@ public class Main2Activity extends BaseMvcActivity {
         RxDoubleClick.onDoubleClick(etSearch, new OnEventCallBack() {
             @Override
             public void doEvent() {
-                Toast.makeText(getApplicationContext(),"刷新",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "刷新", Toast.LENGTH_SHORT).show();
 
+            }
+        });
+        ImageView ivImage = bindView(R.id.iv_image);
+        //GlideUtil.loadBlurImage(this, R.mipmap.ic_launcher, ivImage, 18);
+        GlideUtil.loadImage(this, R.mipmap.avatar, ivImage, new RequestCallBack() {
+            @Override
+            public void requestSuccess() {
+                toastShow("加载图片成功");
+            }
+
+            @Override
+            public void requestFailed() {
+                toastShow("加载图片失败");
             }
         });
     }
