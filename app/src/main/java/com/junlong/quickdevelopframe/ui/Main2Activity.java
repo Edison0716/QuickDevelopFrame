@@ -4,6 +4,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.junlong.framecorelibrary.base.BaseMvcActivity;
 import com.junlong.framecorelibrary.rx.rxtools.OnEventCallBack;
 import com.junlong.framecorelibrary.rx.rxtools.RxDoubleClick;
@@ -28,6 +29,7 @@ public class Main2Activity extends BaseMvcActivity {
             @Override
             public void doEvent() {
                 Toast.makeText(getApplicationContext(),"刷新",Toast.LENGTH_SHORT).show();
+
             }
         });
     }

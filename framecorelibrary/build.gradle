@@ -23,7 +23,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -37,11 +37,8 @@ dependencies {
     compile 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
     compile 'com.jakewharton.rxbinding2:rxbinding-design:2.0.0'
     compile 'com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:2.0.0'
-    //glide
-    compile 'com.github.bumptech.glide:glide:4.0.0-RC1'
-    compile 'com.github.bumptech.glide:compiler:4.0.0-RC0'
-    compile "com.github.bumptech.glide:okhttp3-integration:4.0.0-RC0"
     //okhttp
     compile 'com.squareup.okhttp3:okhttp:3.8.1'
     testCompile 'junit:junit:4.12'
+    compile files('libs/glide-full-4.1.1.jar')
 }
