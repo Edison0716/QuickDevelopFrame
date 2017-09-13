@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
@@ -23,12 +24,42 @@ import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 public class GlideUtil {
 
+    /*****************************较为常用的加载图片方法*****************************/
+
     public static void loadImage(Context context, String url, ImageView view) {
         Glide.with(context).load(url).into(view);
     }
 
     public static void loadImage(Context context, int path, ImageView view) {
         Glide.with(context).load(path).into(view);
+    }
+
+    public static void loadImage(Context context, String url, ImageView view, int placeImage, int errorImage) {
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .placeholder(placeImage)
+                .error(errorImage);
+        Glide.with(context).load(url).apply(options).into(view);
+    }
+
+    public static void loadImage(Context context, String url, ImageView view, int placeImage, int errorImage, final RequestCallBack callBack) {
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .placeholder(placeImage)
+                .error(errorImage);
+        Glide.with(context).load(url).listener(new RequestListener<Drawable>() {
+            @Override
+            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                callBack.requestFailed();
+                return false;
+            }
+
+            @Override
+            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                callBack.requestSuccess();
+                return false;
+            }
+        }).apply(options).into(view);
     }
 
     public static void loadImage(Context context, String url, ImageView view, final RequestCallBack callBack) {
