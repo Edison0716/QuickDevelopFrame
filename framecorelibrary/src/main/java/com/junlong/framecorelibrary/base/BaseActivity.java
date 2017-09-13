@@ -82,14 +82,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract int getLayoutId();
 
-    public void toastShow(int resId) {
-        ToastUtils.normal(resId);
-    }
-
-    public void toastShow(String resId) {
-        ToastUtils.normal(resId);
-    }
-
     //bind view
     public <T extends View> T bindView(@IdRes int id) {
         View viewById = findViewById(id);
@@ -214,5 +206,31 @@ public abstract class BaseActivity extends AppCompatActivity {
                     public void onScrollToClose() {//当滑动关闭
                     }
                 });
+    }
+
+
+    // About Toast
+    public void showNormalToast(int resId) {
+        ToastUtils.normal(resId);
+    }
+
+    public void showNormalToast(String value) {
+        ToastUtils.normal(value);
+    }
+
+    public void showErrorToast(String value) {
+        ToastUtils.error(value);
+    }
+
+    public void showSuccessToast(String value){
+        ToastUtils.success(value);
+    }
+
+    public void showInfoToast(String value){
+        ToastUtils.info(value);
+    }
+
+    public void showAlertToast(String value){
+        ToastUtils.warning(value);
     }
 }

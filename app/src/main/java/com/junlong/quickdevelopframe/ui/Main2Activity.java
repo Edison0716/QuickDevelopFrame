@@ -38,12 +38,12 @@ public class Main2Activity extends BaseMvcActivity {
         GlideUtil.loadImage(this, R.mipmap.avatar, ivImage, new RequestCallBack() {
             @Override
             public void requestSuccess() {
-                toastShow("加载图片成功");
+                showSuccessToast("图片加载成功！");
             }
 
             @Override
             public void requestFailed() {
-                toastShow("加载图片失败");
+                showErrorToast("图片加载失败！");
             }
         });
     }

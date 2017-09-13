@@ -123,7 +123,6 @@ public class ToastUtils {
     //===========================================使用ApplicationContext 方法=========================
 
     //*******************************************常规方法********************************************
-
     public static void error(@NonNull String message, int duration) {
         error(getContext(), message, duration, true).show();
     }

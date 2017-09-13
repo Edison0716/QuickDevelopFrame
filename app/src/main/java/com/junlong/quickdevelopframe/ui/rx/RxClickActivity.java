@@ -33,7 +33,7 @@ public class RxClickActivity extends BaseMvcActivity {
                 i++;
                 tvCount.setText(String.valueOf(i));
                 Log.d("count",String.valueOf(i));
-                toastShow(i+"");
+                showInfoToast(i+"");
             }
 
             @Override
