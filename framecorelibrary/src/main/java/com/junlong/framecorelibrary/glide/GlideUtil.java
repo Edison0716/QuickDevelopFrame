@@ -27,11 +27,11 @@ public class GlideUtil {
     /*****************************较为常用的加载图片方法*****************************/
 
     public static void loadImage(Context context, String url, ImageView view) {
-        Glide.with(context).load(url).into(view);
+        Glide.with(context).load(url).thumbnail(0.2f).into(view);
     }
 
     public static void loadImage(Context context, int path, ImageView view) {
-        Glide.with(context).load(path).into(view);
+        Glide.with(context).load(path).thumbnail(0.2f).into(view);
     }
 
     public static void loadImage(Context context, String url, ImageView view, int placeImage, int errorImage) {
