@@ -210,10 +210,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
     // About Toast
-    public void showNormalToast(int resId) {
-        ToastUtils.normal(resId);
-    }
-
     public void showNormalToast(String value) {
         ToastUtils.normal(value);
     }
@@ -222,15 +218,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         ToastUtils.error(value);
     }
 
-    public void showSuccessToast(String value){
+    public void showSuccessToast(String value) {
         ToastUtils.success(value);
     }
 
-    public void showInfoToast(String value){
+    public void showInfoToast(String value) {
         ToastUtils.info(value);
     }
 
-    public void showAlertToast(String value){
+    public void showAlertToast(String value) {
         ToastUtils.warning(value);
     }
 }

@@ -57,10 +57,6 @@ public class ToastUtils {
     private static Toast mToast;
     private static long mExitTime;
 
-    public static void normal(@NonNull int message) {
-        normal(getContext(), getContext().getResources().getString(message), Toast.LENGTH_SHORT, null, false).show();
-    }
-
     public static void normal(@NonNull String message) {
         normal(getContext(), message, Toast.LENGTH_SHORT, null, false).show();
     }
