@@ -1,1 +1,1 @@
-include ':app', ':framecorelibrary'
+include ':app', ':framecorelibrary', ':bottombar'
