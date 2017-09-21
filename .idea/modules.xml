@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/bottombar/bottombar.iml" filepath="$PROJECT_DIR$/bottombar/bottombar.iml" />
       <module fileurl="file://$PROJECT_DIR$/framecorelibrary/framecorelibrary.iml" filepath="$PROJECT_DIR$/framecorelibrary/framecorelibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/retrofitutils/retrofitutils.iml" filepath="$PROJECT_DIR$/retrofitutils/retrofitutils.iml" />
     </modules>
   </component>
 </project>
