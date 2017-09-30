@@ -1,6 +1,7 @@
 package com.junlong.quickdevelopframe.ui;
 
 import android.Manifest;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 import com.junlong.framecorelibrary.base.BaseMvcActivity;
 import com.junlong.framecorelibrary.glide.GlideUtil;
 import com.junlong.framecorelibrary.glide.RequestCallBack;
+import com.junlong.framecorelibrary.permissions.Permission;
 import com.junlong.framecorelibrary.permissions.RxPermissions;
 import com.junlong.framecorelibrary.rx.rxtools.OnEventCallBack;
 import com.junlong.framecorelibrary.rx.rxtools.RxDoubleClick;
@@ -20,7 +22,7 @@ public class Main2Activity extends BaseMvcActivity implements View.OnClickListen
 
 
     private RxPermissions mPermissions;
-
+    private static final String TAG = "USER_PERMISSIONS";
     @Override
     protected int setScreenOrientation() {
         return 1;
@@ -82,17 +84,22 @@ public class Main2Activity extends BaseMvcActivity implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_permissions:
-                mPermissions.request(Manifest.permission.CAMERA)
-                                    .subscribe(new Consumer<Boolean>() {
-                                @Override
-                                public void accept(Boolean aBoolean) throws Exception {
-                                    if (aBoolean) {
-                                        showInfoToast("权限已申请");
-                                    } else {
-                                        showAlertToast("权限已拒绝");
-                                    }
-                                }
-                        });
+                mPermissions.requestEach(Manifest.permission.CAMERA,Manifest.permission.RECORD_AUDIO)
+                                    .subscribe(new Consumer<Permission>(){
+                                        @Override
+                                        public void accept(Permission permission) throws Exception {
+                                            if (permission.granted) {
+                                                // 用户已经同意该权限
+                                                Log.d(TAG, permission.name + " is granted.");
+                                            } else if (permission.shouldShowRequestPermissionRationale) {
+                                                // 用户拒绝了该权限，没有选中『不再询问』（Never ask again）,那么下次再次启动时，还会提示请求权限的对话框
+                                                Log.d(TAG, permission.name + " is denied. More info should be provided.");
+                                            } else {
+                                                // 用户拒绝了该权限，并且选中『不再询问』
+                                                Log.d(TAG, permission.name + " is denied.");
+                                            }
+                                        }
+                                    });
                 break;
         }
     }
